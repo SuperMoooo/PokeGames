@@ -2,6 +2,14 @@ import pokeGuess from '@/app/assets/guessPokemon.png';
 import blurPokemon from '@/app/assets/blurPokemon.png';
 import fightingType from '@/app/assets/fightingType.png';
 
+import pokeBall from '../../public/pokeBall.png';
+
+import greatBall from '../../public/greatBall.png';
+
+import ultraBall from '../../public/ultraBall.png';
+
+import masterBall from '../../public/masterBall.png';
+
 export const GAMEMODES = [
     {
         name: 'Guess Pokemon',
@@ -18,7 +26,7 @@ export const GAMEMODES = [
     {
         name: 'Stronger or Weaker',
         image: fightingType,
-        description: 'If next pokemon is stronger or weaker',
+        description: 'Guess if the next pokemon is stronger or weaker',
         link: '/pages/strongerOrWeaker',
     },
 ];
@@ -31,3 +39,7 @@ export type PokeRow = [
     { color: string; value: string },
     { habitat: string; value: string }
 ];
+
+export const PokeBalls = [pokeBall, greatBall, ultraBall, masterBall];
+
+export const MAX_POS = 1980;

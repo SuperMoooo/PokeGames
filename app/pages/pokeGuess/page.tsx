@@ -5,12 +5,13 @@ import {
     getPokemonMoreData,
 } from '@/app/actions/pokemonApiCalls';
 import Bg from '@/app/components/Bg';
+import Congratulations from '@/app/components/Congratulations';
 import Footer from '@/app/components/Footer';
 import HeaderInput from '@/app/components/HeaderInput';
 import Loading from '@/app/components/Loading';
+import ModalGuessed from '@/app/components/ModalGuessed';
 import SubmitRow from '@/app/components/SubmitRow';
 import { PokeRow } from '@/app/lib/constants';
-import { firstCharToLowerCase, firstCharToUpperCase } from '@/app/lib/hooks';
 import React, { useEffect, useState } from 'react';
 
 export default function PokeGuess() {
@@ -24,9 +25,21 @@ export default function PokeGuess() {
     const [rows, setRows] = useState<any[]>([]);
     const [closestPokemon, setClosestPokemon] = useState<string>('');
     const [disableInput, setDisableInput] = useState<boolean>(false);
+    const [restartGameTrigger, setRestartGameTrigger] =
+        useState<boolean>(false);
 
     //EFFECTS
     useEffect(() => {
+        const restartGame = () => {
+            setRestartGameTrigger(false);
+            setGameEnded(false);
+            setRows([]);
+            setClosestPokemon('');
+            setPokemonInput('');
+            setDisableInput(false);
+            getRandomPokemon();
+        };
+
         const getRandomPokemon = async () => {
             const randomNumber = Math.floor(Math.random() * (1026 - 0) + 0);
             //START LOADING
@@ -41,7 +54,7 @@ export default function PokeGuess() {
                 const rightPokemonMoreData = await getPokemonMoreData(
                     rightPokemonData.species.url
                 );
-                console.log(rightPokemonData.name);
+                //console.log(rightPokemonData.name);
                 setRightPokemon(rightPokemonData);
                 setRightPokemonMoreData(rightPokemonMoreData);
 
@@ -57,8 +70,12 @@ export default function PokeGuess() {
                 console.log(error);
             }
         };
-        getRandomPokemon();
-    }, []);
+        if (restartGameTrigger) {
+            restartGame();
+        } else {
+            getRandomPokemon();
+        }
+    }, [restartGameTrigger]);
 
     //FUNCTIONS
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -149,6 +166,10 @@ export default function PokeGuess() {
         }
     };
 
+    const triggerRestartGame = () => {
+        setRestartGameTrigger(true);
+    };
+
     if (loading) {
         return <Loading />;
     }
@@ -168,6 +189,17 @@ export default function PokeGuess() {
                 />
                 <SubmitRow rows={rows} />
             </main>
+            <Congratulations gameEnded={gameEnded} />
+            <ModalGuessed
+                pokeImg={
+                    rightPokemon.sprites.other['official-artwork'][
+                        'front_default'
+                    ]
+                }
+                pokemonName={rightPokemon.name}
+                gameEnded={gameEnded}
+                restartGame={triggerRestartGame}
+            />
             <Footer />
         </div>
     );

@@ -37,21 +37,7 @@ export default function HeaderInput({
     return (
         <section className="flex items-center flex-col text-center gap-4 h-full">
             <div className="p-4 flex items-center flex-col">
-                <picture className={`${gameEnded ? 'block' : 'hidden'}`}>
-                    <Image
-                        src={
-                            rightPokemon['sprites']['other'][
-                                'official-artwork'
-                            ]['front_default']
-                        }
-                        alt="Mistery Pokemon"
-                        width={200}
-                        height={200}
-                    />
-                </picture>
-                <h1 className=" text-5xl">
-                    {gameEnded ? 'Gongratulations!!!' : 'Guess the Pokemon'}
-                </h1>
+                <h1 className=" text-5xl">Guess the Pokemon</h1>
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="relative">

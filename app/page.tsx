@@ -6,7 +6,7 @@ import Bg from './components/Bg';
 
 export default function Home() {
     return (
-        <div className="grid grid-rows-[1fr_auto] place-items-center w-full min-h-[100dvh]">
+        <div className="grid grid-rows-[1fr_auto] place-items-center w-full min-h-[100dvh] ">
             <Bg />
             <main className="flex items-center justify-around flex-col lg:flex-row w-full h-full z-10">
                 {GAMEMODES.map((game, index) => {
@@ -46,6 +46,7 @@ export default function Home() {
                     );
                 })}
             </main>
+
             <Footer />
         </div>
     );

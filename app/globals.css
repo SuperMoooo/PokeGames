@@ -65,3 +65,63 @@ body {
     border: 30px solid transparent !important;
     border-image: url(assets/pokedexBorder.png) 30 !important;
 }
+
+.gongratulations0 {
+    transform: translateY(-250px);
+    animation: pokeRain 2.6s ease-in-out forwards;
+}
+
+.gongratulations1 {
+    transform: translateY(-250px);
+    animation: pokeRain2 2.6s ease-in-out 0.04s forwards;
+}
+.gongratulations2 {
+    transform: translateY(-250px);
+    animation: pokeRain3 2.6s ease-in-out 0.06s forwards;
+}
+.gongratulations3 {
+    transform: translateY(-250px);
+    animation: pokeRain4 2.6s ease-in-out 0.08s forwards;
+}
+
+@keyframes pokeRain {
+    from {
+        transform: translateY(-250px) rotate(0deg);
+    }
+
+    to {
+        display: none;
+        transform: translateY(2000px) rotate(360deg);
+    }
+}
+@keyframes pokeRain2 {
+    from {
+        transform: translateY(-350px) rotate(90deg);
+    }
+
+    to {
+        display: none;
+        transform: translateY(2000px) rotate(360deg);
+    }
+}
+
+@keyframes pokeRain3 {
+    from {
+        transform: translateY(-150px) rotate(185deg);
+    }
+
+    to {
+        display: none;
+        transform: translateY(2000px) rotate(360deg);
+    }
+}
+@keyframes pokeRain4 {
+    from {
+        transform: translateY(-450px) rotate(285deg);
+    }
+
+    to {
+        display: none;
+        transform: translateY(2000px) rotate(360deg);
+    }
+}
