@@ -95,11 +95,12 @@ export default function HeaderInput({
                         .map((pokemon, index) => {
                             return (
                                 <div
-                                    onClick={(e) =>
+                                    onClick={(e) => {
                                         setPokemonInput(
                                             firstCharToUpperCase(pokemon[0])
-                                        )
-                                    }
+                                        );
+                                        handleSubmit(e);
+                                    }}
                                     className={` px-4 py-2 w-full h-full z-50 cursor-pointer bg-white text-black hover:bg-zinc-100 font-bold transition-colors duration-300   ${
                                         pokemonInput !== '' ? 'block' : 'hidden'
                                     } ${
