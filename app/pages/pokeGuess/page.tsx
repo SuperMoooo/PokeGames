@@ -23,7 +23,6 @@ export default function PokeGuess() {
     const [gameEnded, setGameEnded] = useState<boolean>(false);
     const [pokemonInput, setPokemonInput] = useState<string>('');
     const [rows, setRows] = useState<any[]>([]);
-    const [closestPokemon, setClosestPokemon] = useState<string>('');
     const [disableInput, setDisableInput] = useState<boolean>(false);
     const [restartGameTrigger, setRestartGameTrigger] =
         useState<boolean>(false);
@@ -34,7 +33,6 @@ export default function PokeGuess() {
             setRestartGameTrigger(false);
             setGameEnded(false);
             setRows([]);
-            setClosestPokemon('');
             setPokemonInput('');
             setDisableInput(false);
             getRandomPokemon();
@@ -54,7 +52,7 @@ export default function PokeGuess() {
                 const rightPokemonMoreData = await getPokemonMoreData(
                     rightPokemonData.species.url
                 );
-                console.log(rightPokemonData.name);
+                //console.log(rightPokemonData.name);
                 setRightPokemon(rightPokemonData);
                 setRightPokemonMoreData(rightPokemonMoreData);
 
@@ -78,7 +76,10 @@ export default function PokeGuess() {
     }, [restartGameTrigger]);
 
     //FUNCTIONS
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (
+        e: React.FormEvent<HTMLFormElement>,
+        pokemon: string
+    ) => {
         setDisableInput(true);
         try {
             if (pokemonInput === '') {
@@ -88,7 +89,7 @@ export default function PokeGuess() {
 
             e.preventDefault();
             const thisPokemonData = await getPokemon(
-                closestPokemon[0].toLocaleLowerCase()
+                pokemon.toLocaleLowerCase()
             );
             const morePokemonData = await getPokemonMoreData(
                 thisPokemonData.species.url
@@ -163,6 +164,10 @@ export default function PokeGuess() {
             }, 2500);
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => {
+                setDisableInput(false);
+            }, 2500);
         }
     };
 
@@ -178,13 +183,10 @@ export default function PokeGuess() {
             <Bg />
             <main className="z-10 grid grid-rows-[auto_1fr] gap-12">
                 <HeaderInput
-                    gameEnded={gameEnded}
-                    rightPokemon={rightPokemon}
                     pokemonList={allPokemonList}
                     setPokemonInput={setPokemonInput}
                     pokemonInput={pokemonInput}
                     handleSubmit={handleSubmit}
-                    setClosestPokemon={setClosestPokemon}
                     disableInput={disableInput}
                 />
                 <SubmitRow rows={rows} />
