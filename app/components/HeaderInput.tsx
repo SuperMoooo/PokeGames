@@ -71,6 +71,7 @@ export default function HeaderInput({
                                                 e.currentTarget.innerText
                                             )
                                         );
+
                                         handleSubmit(
                                             e,
                                             e.currentTarget.innerText

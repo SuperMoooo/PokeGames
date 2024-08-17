@@ -88,6 +88,12 @@ export default function PokeGuess() {
             }
 
             e.preventDefault();
+            const updatedList = allPokemonList.filter(
+                (pokemonAux: any) =>
+                    pokemonAux[0] !== pokemon.toLocaleLowerCase()
+            );
+
+            setAllPokemonList(updatedList);
             const thisPokemonData = await getPokemon(
                 pokemon.toLocaleLowerCase()
             );
