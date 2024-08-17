@@ -19,11 +19,11 @@ export default function ModalGuessed({
 }: ModalProps) {
     return (
         <main
-            className={`absolute top-0 left-0 w-full h-full bg-black/50  items-center justify-center z-30 ${
+            className={`absolute  top-0 left-0 w-full h-full bg-black/50  items-center justify-center z-30 ${
                 gameEnded ? 'flex' : 'hidden'
             }`}
         >
-            <section className="z-50 rounded-lg bg-zinc-700 py-10 px-20 grid grid-cols-[1fr] gap-4">
+            <section className="z-50 rounded-lg bg-zinc-700 py-10 px-20 grid grid-cols-[1fr] revealCard1 gap-4">
                 <picture className="flex items-center justify-center flex-col gap-5">
                     <h1 className="text-center text-6xl">Gongratulations!!!</h1>
                     <Image
