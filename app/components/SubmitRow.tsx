@@ -8,7 +8,7 @@ interface RowsProps {
 
 export default function SubmitRow({ rows }: RowsProps) {
     return (
-        <section className="flex items-center justify-end h-full gap-4 flex-col">
+        <section className="flex md:items-center items-start justify-end h-full gap-4 flex-col overflow-x-scroll md:overflow-x-hidden">
             <ul className="flex items-center justify-center gap-4 *:text-center *:w-32 *:font-bold *:border-b-2 *:pb-2">
                 <li>Image</li>
                 <li>Name</li>

@@ -54,7 +54,7 @@ export default function PokeGuess() {
                 const rightPokemonMoreData = await getPokemonMoreData(
                     rightPokemonData.species.url
                 );
-                //console.log(rightPokemonData.name);
+                console.log(rightPokemonData.name);
                 setRightPokemon(rightPokemonData);
                 setRightPokemonMoreData(rightPokemonMoreData);
 
