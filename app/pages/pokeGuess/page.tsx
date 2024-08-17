@@ -161,7 +161,7 @@ export default function PokeGuess() {
                 },
             ];
             setRows((prevRows) => [...prevRows, PokeRow]);
-            if (pokemonInput.toLocaleLowerCase() === rightPokemon.name) {
+            if (pokemon.toLocaleLowerCase() === rightPokemon.name) {
                 setTimeout(() => {
                     setGameEnded(true);
                 }, 3500);
