@@ -19,7 +19,7 @@ export default function ModalGuessed({
 }: ModalProps) {
     return (
         <main
-            className={`absolute  top-0 left-0 w-full h-full bg-black/50  items-center justify-center z-30 ${
+            className={`fixed top-0 left-0 w-full min-h-[100dvh] bg-black/50  items-center justify-center z-30 ${
                 gameEnded ? 'flex' : 'hidden'
             }`}
         >
