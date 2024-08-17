@@ -49,7 +49,10 @@ body {
     animation: revealCardAnimation 1s ease forwards 2.5s;
     transition: all 1s ease;
 }
-
+.revealCard7 {
+    animation: revealCardAnimation 1s ease forwards 3s;
+    transition: all 1s ease;
+}
 @keyframes revealCardAnimation {
     0% {
         transform: translateY(100px);

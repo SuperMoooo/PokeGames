@@ -12,6 +12,7 @@ export default function SubmitRow({ rows }: RowsProps) {
             <ul className="flex items-center justify-center gap-4 *:text-center *:w-32 *:font-bold *:border-b-2 *:pb-2">
                 <li>Image</li>
                 <li>Name</li>
+                <li>Generation</li>
                 <li>Type 1</li>
                 <li>Type 2</li>
                 <li>Color</li>
@@ -51,38 +52,51 @@ export default function SubmitRow({ rows }: RowsProps) {
                                         : 'bg-red-600'
                                 }`}
                             >
-                                <h1>{firstCharToUpperCase(row[2].type1)}</h1>
+                                <h1>
+                                    {firstCharToUpperCase(
+                                        row[2].gen
+                                    ).toLocaleUpperCase()}
+                                </h1>
                             </div>
                             <div
                                 className={`revealCard4 ${
-                                    row[3]?.value === 'green'
+                                    row[3].value === 'green'
+                                        ? 'bg-green-600'
+                                        : 'bg-red-600'
+                                }`}
+                            >
+                                <h1>{firstCharToUpperCase(row[3].type1)}</h1>
+                            </div>
+                            <div
+                                className={`revealCard5 ${
+                                    row[4]?.value === 'green'
                                         ? 'bg-green-600'
                                         : 'bg-red-600'
                                 }`}
                             >
                                 <h1>
-                                    {row[3]?.type2
-                                        ? firstCharToUpperCase(row[3]?.type2)
+                                    {row[4]?.type2
+                                        ? firstCharToUpperCase(row[4]?.type2)
                                         : 'None'}
                                 </h1>
                             </div>
                             <div
-                                className={`revealCard5 ${
-                                    row[4].value === 'green'
-                                        ? 'bg-green-600'
-                                        : 'bg-red-600'
-                                }`}
-                            >
-                                <h1>{firstCharToUpperCase(row[4].color)}</h1>
-                            </div>
-                            <div
-                                className={`revealCard6  ${
+                                className={`revealCard6 ${
                                     row[5].value === 'green'
                                         ? 'bg-green-600'
                                         : 'bg-red-600'
                                 }`}
                             >
-                                <h1>{firstCharToUpperCase(row[5].habitat)}</h1>
+                                <h1>{firstCharToUpperCase(row[5].color)}</h1>
+                            </div>
+                            <div
+                                className={`revealCard7  ${
+                                    row[6].value === 'green'
+                                        ? 'bg-green-600'
+                                        : 'bg-red-600'
+                                }`}
+                            >
+                                <h1>{firstCharToUpperCase(row[6].habitat)}</h1>
                             </div>
                         </div>
                     );

@@ -120,6 +120,14 @@ export default function PokeGuess() {
                             : 'red',
                 },
                 {
+                    gen: morePokemonData.generation.name.split('-')[1],
+                    value:
+                        morePokemonData.generation.name ===
+                        rightPokemonMoreData.generation.name
+                            ? 'green'
+                            : 'red',
+                },
+                {
                     type1: thisPokemonData.types[0].type.name,
                     value:
                         thisPokemonData.types[0].type.name ===

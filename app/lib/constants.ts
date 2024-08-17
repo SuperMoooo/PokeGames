@@ -34,6 +34,7 @@ export const GAMEMODES = [
 export type PokeRow = [
     { img: string; value: null },
     { name: string; value: string },
+    { gen: string; value: string },
     { type1: string; value: string },
     { type2: string; value: string },
     { color: string; value: string },
