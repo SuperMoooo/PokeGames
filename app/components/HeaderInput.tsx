@@ -95,6 +95,7 @@ export default function HeaderInput({
                                                 alt={pokemon}
                                                 width={60}
                                                 height={60}
+                                                unoptimized
                                             />
                                         </picture>
                                         <span>

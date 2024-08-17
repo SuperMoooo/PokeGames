@@ -34,6 +34,7 @@ export default function SubmitRow({ rows }: RowsProps) {
                                     alt={row[1].name}
                                     width={100}
                                     height={100}
+                                    unoptimized
                                 />
                             </picture>
                             <div
