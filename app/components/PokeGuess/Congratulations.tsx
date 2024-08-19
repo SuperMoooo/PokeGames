@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import React, { use, useEffect, useState } from 'react';
-import { MAX_POS, PokeBalls } from '../lib/constants';
+import { MAX_POS, PokeBalls } from '../../lib/constants';
 
 interface ActivationProps {
     gameEnded: boolean;

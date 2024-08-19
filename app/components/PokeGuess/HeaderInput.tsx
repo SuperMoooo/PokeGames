@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { firstCharToUpperCase } from '../lib/hooks';
+import { firstCharToUpperCase } from '../../lib/hooks';
+import GoBack from '../GoBack';
 
 interface HeaderProps {
     pokemonList: string[];
@@ -8,6 +9,7 @@ interface HeaderProps {
     pokemonInput: string;
     handleSubmit: (e: any, pokemon: string) => void;
     disableInput: boolean;
+    resetGame: () => void;
 }
 export default function HeaderInput({
     pokemonList,
@@ -15,6 +17,7 @@ export default function HeaderInput({
     pokemonInput,
     handleSubmit,
     disableInput,
+    resetGame,
 }: HeaderProps) {
     const [filtered, setFiltered] = useState<string[]>([]);
     const [closestPokemon, setClosestPokemon] = useState<string>('');
@@ -30,8 +33,9 @@ export default function HeaderInput({
         }
     }, [pokemonInput]);
     return (
-        <section className="flex items-center flex-col text-center gap-4 h-full">
-            <div className="p-4 flex items-center flex-col">
+        <section className="flex items-center flex-col text-center gap-4 h-full w-full">
+            <div className=" flex items-center flex-col gap-6 w-full">
+                <GoBack resetBtn={true} resetGame={resetGame} />
                 <h1 className=" text-5xl">Guess the Pokemon</h1>
             </div>
             <form onSubmit={(e) => handleSubmit(e, closestPokemon[0])}>

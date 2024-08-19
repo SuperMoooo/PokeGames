@@ -5,69 +5,102 @@ import {
     getPokemonMoreData,
 } from '@/app/actions/pokemonApiCalls';
 import Bg from '@/app/components/Bg';
-import Congratulations from '@/app/components/Congratulations';
+import Congratulations from '@/app/components/PokeGuess/Congratulations';
 import Footer from '@/app/components/Footer';
-import HeaderInput from '@/app/components/HeaderInput';
+import HeaderInput from '@/app/components/PokeGuess/HeaderInput';
 import Loading from '@/app/components/Loading';
-import ModalGuessed from '@/app/components/ModalGuessed';
-import SubmitRow from '@/app/components/SubmitRow';
+import ModalGuessed from '@/app/components/PokeGuess/ModalGuessed';
+import SubmitRow from '@/app/components/PokeGuess/SubmitRow';
 import { PokeRow } from '@/app/lib/constants';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    setCorrectPokemonData,
+    setCorrectPokemonMoreData,
+} from '@/app/store/pokeGuessSlice/rightPokemonSlice';
+import { setAllPokemons } from '@/app/store/pokeGuessSlice/allPokemonsSlice';
+import {
+    resetPokemonRows,
+    setPokemonRows,
+} from '@/app/store/pokeGuessSlice/rowsPokemonSlice';
 
 export default function PokeGuess() {
+    // REDUX STATES
+    const rightPokemonFirstData = useSelector(
+        (state: any) => state.rightPokemon.rightPokemonData[0].firstData || []
+    );
+    const rightPokemonSecondData = useSelector(
+        (state: any) => state.rightPokemon.rightPokemonData[0].secondData || []
+    );
+    const allPokemonList = useSelector(
+        (state: any) => state.allPokemons.allPokeData || []
+    );
+
+    const dispatch = useDispatch();
     //STATES
-    const [rightPokemon, setRightPokemon] = useState<any>([]);
-    const [rightPokemonMoreData, setRightPokemonMoreData] = useState<any>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [allPokemonList, setAllPokemonList] = useState<string[]>([]);
     const [gameEnded, setGameEnded] = useState<boolean>(false);
     const [pokemonInput, setPokemonInput] = useState<string>('');
-    const [rows, setRows] = useState<any[]>([]);
     const [disableInput, setDisableInput] = useState<boolean>(false);
     const [restartGameTrigger, setRestartGameTrigger] =
         useState<boolean>(false);
-
+    const [totalNumberPokemon, setTotalNumberPokemon] = useState<number>(0);
     //EFFECTS
     useEffect(() => {
         const restartGame = () => {
+            setLoading(true);
             setRestartGameTrigger(false);
             setGameEnded(false);
-            setRows([]);
             setPokemonInput('');
             setDisableInput(false);
             getRandomPokemon();
+            dispatch(resetPokemonRows([]));
+            dispatch(setCorrectPokemonData([]));
+            dispatch(setCorrectPokemonMoreData([]));
         };
 
         const getRandomPokemon = async () => {
             const randomNumber = Math.floor(Math.random() * (1026 - 0) + 0);
-            //START LOADING
-            setLoading(true);
+
             try {
-                //FETCH LIST OF ALL POKEMONS
-                const allPokemon = await allPokemons();
-                //GET IMAGE OF THE SPECIFIC POKEMON
-                const rightPokemonData = await getPokemon(
-                    allPokemon.results[randomNumber].name
-                );
-                const rightPokemonMoreData = await getPokemonMoreData(
-                    rightPokemonData.species.url
-                );
-                //console.log(rightPokemonData.name);
-                setRightPokemon(rightPokemonData);
-                setRightPokemonMoreData(rightPokemonMoreData);
+                if (
+                    rightPokemonFirstData.length === 0 &&
+                    rightPokemonSecondData.length === 0
+                ) {
+                    //START LOADING
+                    setLoading(true);
 
-                //GET ALL NAMES OF THE POKEMONS
-                const pokemonAuxList = allPokemon.results.map(
-                    (pokemon: any, index: number) => [pokemon.name, index]
-                );
-                setAllPokemonList(pokemonAuxList);
+                    //FETCH LIST OF ALL POKEMONS
+                    const allPokemon = await allPokemons();
+                    //GET ALL NAMES OF THE POKEMONS
+                    const pokemonAuxList = allPokemon.results.map(
+                        (pokemon: any, index: number) => [pokemon.name, index]
+                    );
+                    setTotalNumberPokemon(pokemonAuxList.length);
+                    // SET STATES REDUX
+                    dispatch(setAllPokemons(pokemonAuxList));
 
-                //FINISH LOADING
-                setLoading(false);
+                    const rightPokemonData = await getPokemon(
+                        allPokemonList[randomNumber][0]
+                    );
+                    const rightPokemonMoreData = await getPokemonMoreData(
+                        rightPokemonData.species.url
+                    );
+
+                    // SET STATES REDUX
+                    dispatch(setCorrectPokemonData(rightPokemonData));
+                    dispatch(setCorrectPokemonMoreData(rightPokemonMoreData));
+                }
             } catch (error) {
                 console.log(error);
+            } finally {
+                //FINISH LOADING
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1500);
             }
         };
+
         if (restartGameTrigger) {
             restartGame();
         } else {
@@ -93,7 +126,7 @@ export default function PokeGuess() {
                     pokemonAux[0] !== pokemon.toLocaleLowerCase()
             );
 
-            setAllPokemonList(updatedList);
+            dispatch(setAllPokemons(updatedList));
             const thisPokemonData = await getPokemon(
                 pokemon.toLocaleLowerCase()
             );
@@ -107,10 +140,10 @@ export default function PokeGuess() {
             } else {
                 habitatValue = morePokemonData.habitat;
             }
-            if (rightPokemonMoreData.habitat !== null) {
-                rightHabitatValue = rightPokemonMoreData.habitat.name;
+            if (rightPokemonSecondData.habitat !== null) {
+                rightHabitatValue = rightPokemonSecondData.habitat.name;
             } else {
-                rightHabitatValue = rightPokemonMoreData.habitat;
+                rightHabitatValue = rightPokemonSecondData.habitat;
             }
 
             const PokeRow: PokeRow = [
@@ -121,7 +154,7 @@ export default function PokeGuess() {
                 {
                     name: thisPokemonData.name,
                     value:
-                        thisPokemonData.name === rightPokemon.name
+                        thisPokemonData.name === rightPokemonFirstData.name
                             ? 'green'
                             : 'red',
                 },
@@ -129,7 +162,7 @@ export default function PokeGuess() {
                     gen: morePokemonData.generation.name.split('-')[1],
                     value:
                         morePokemonData.generation.name ===
-                        rightPokemonMoreData.generation.name
+                        rightPokemonSecondData.generation.name
                             ? 'green'
                             : 'red',
                 },
@@ -137,7 +170,7 @@ export default function PokeGuess() {
                     type1: thisPokemonData.types[0].type.name,
                     value:
                         thisPokemonData.types[0].type.name ===
-                        rightPokemon.types[0].type.name
+                        rightPokemonFirstData.types[0].type.name
                             ? 'green'
                             : 'red',
                 },
@@ -145,7 +178,7 @@ export default function PokeGuess() {
                     type2: thisPokemonData.types[1]?.type.name,
                     value:
                         thisPokemonData.types[1]?.type.name ===
-                        rightPokemon.types[1]?.type.name
+                        rightPokemonFirstData.types[1]?.type.name
                             ? 'green'
                             : 'red',
                 },
@@ -153,7 +186,7 @@ export default function PokeGuess() {
                     color: morePokemonData.color.name,
                     value:
                         morePokemonData.color.name ===
-                        rightPokemonMoreData.color.name
+                        rightPokemonSecondData.color.name
                             ? 'green'
                             : 'red',
                 },
@@ -166,8 +199,8 @@ export default function PokeGuess() {
                     value: rightHabitatValue === habitatValue ? 'green' : 'red',
                 },
             ];
-            setRows((prevRows) => [...prevRows, PokeRow]);
-            if (pokemon.toLocaleLowerCase() === rightPokemon.name) {
+            dispatch(setPokemonRows(PokeRow));
+            if (pokemon.toLocaleLowerCase() === rightPokemonFirstData.name) {
                 setTimeout(() => {
                     setGameEnded(true);
                 }, 3500);
@@ -202,17 +235,18 @@ export default function PokeGuess() {
                     pokemonInput={pokemonInput}
                     handleSubmit={handleSubmit}
                     disableInput={disableInput}
+                    resetGame={triggerRestartGame}
                 />
-                <SubmitRow rows={rows} />
+                <SubmitRow />
             </main>
             <Congratulations gameEnded={gameEnded} />
             <ModalGuessed
                 pokeImg={
-                    rightPokemon.sprites.other['official-artwork'][
+                    rightPokemonFirstData?.sprites?.other['official-artwork'][
                         'front_default'
                     ]
                 }
-                pokemonName={rightPokemon.name}
+                pokemonName={rightPokemonFirstData.name}
                 gameEnded={gameEnded}
                 restartGame={triggerRestartGame}
             />

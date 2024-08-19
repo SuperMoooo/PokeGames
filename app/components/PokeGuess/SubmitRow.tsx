@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import React from 'react';
-import { firstCharToUpperCase } from '../lib/hooks';
+import { firstCharToUpperCase } from '../../lib/hooks';
+import { useSelector } from 'react-redux';
 
-interface RowsProps {
-    rows: any[];
-}
+export default function SubmitRow() {
+    const rowsPokemon = useSelector(
+        (state: any) => state.rowsPokemon.data || []
+    );
 
-export default function SubmitRow({ rows }: RowsProps) {
     return (
         <section className="flex md:items-center items-start justify-end h-full gap-4 flex-col overflow-x-scroll md:overflow-x-hidden overflow-y-hidden">
             <ul className="flex items-center justify-center gap-4 *:text-center *:w-32 *:font-bold *:border-b-2 *:pb-2">
@@ -18,8 +19,9 @@ export default function SubmitRow({ rows }: RowsProps) {
                 <li>Color</li>
                 <li>Habitat</li>
             </ul>
+
             <div className="flex items-center justify-end h-full gap-4 flex-col-reverse  ">
-                {rows.map((row, index) => {
+                {rowsPokemon.map((row: any, index: number) => {
                     return (
                         <div
                             key={index}

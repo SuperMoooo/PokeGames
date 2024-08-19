@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
-import { firstCharToUpperCase } from '../lib/hooks';
+import { firstCharToUpperCase } from '../../lib/hooks';
 import Link from 'next/link';
-import { GAMEMODES } from '../lib/constants';
+import { GAMEMODES } from '../../lib/constants';
 
 interface ModalProps {
     pokeImg: string;
@@ -29,8 +29,8 @@ export default function ModalGuessed({
                         Gongratulations!!!
                     </h1>
                     <Image
-                        src={pokeImg}
-                        alt={pokemonName}
+                        src={pokeImg ? pokeImg : '/pokeball.png'}
+                        alt={pokemonName ? pokemonName : 'pokemon'}
                         width={400}
                         height={400}
                         className="md:w-full sm:w-72 w-44"
