@@ -1,12 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PokeRow } from '@/app/lib/constants';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export const rowsPokemonSlice = createSlice({
     name: 'rowPokemon',
     initialState: {
-        data: [],
+        data: [] as PokeRow[],
     },
     reducers: {
-        setPokemonRows: (state, action): any => {
+        setPokemonRows: (state, action: PayloadAction<PokeRow>) => {
             state.data.push(action.payload);
         },
         resetPokemonRows: (state, action) => {

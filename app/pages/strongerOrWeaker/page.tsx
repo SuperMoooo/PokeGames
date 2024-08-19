@@ -13,7 +13,7 @@ export default function StrongerOrWeaker() {
     return (
         <div className="grid grid-rows-[auto_1fr_auto] justify-center w-full min-h-[100dvh] p-6">
             <Bg />
-            <GoBack />
+            <GoBack resetBtn={false} resetGame={() => null} />
             <main className="z-20"></main>
             <Footer />
         </div>
