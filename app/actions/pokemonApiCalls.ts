@@ -2,7 +2,7 @@
 export const allPokemons = async () => {
     try {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_GET_POKEMON}?offset=0&limit=10000`,
+            `${process.env.NEXT_PUBLIC_API_FIND_POKEMON}?limit=100000&offset=0`,
             {
                 cache: 'force-cache',
             }

@@ -44,7 +44,7 @@ export default function PokeGuess() {
     const [disableInput, setDisableInput] = useState<boolean>(false);
     const [restartGameTrigger, setRestartGameTrigger] =
         useState<boolean>(false);
-    const [totalNumberPokemon, setTotalNumberPokemon] = useState<number>(0);
+
     //EFFECTS
     useEffect(() => {
         const restartGame = () => {
@@ -58,10 +58,7 @@ export default function PokeGuess() {
             dispatch(setCorrectPokemonData([]));
             dispatch(setCorrectPokemonMoreData([]));
         };
-
         const getRandomPokemon = async () => {
-            const randomNumber = Math.floor(Math.random() * (1026 - 0) + 0);
-
             try {
                 if (
                     rightPokemonFirstData.length === 0 &&
@@ -72,16 +69,23 @@ export default function PokeGuess() {
 
                     //FETCH LIST OF ALL POKEMONS
                     const allPokemon = await allPokemons();
+                    const randomNumber = Math.floor(
+                        Math.random() * (allPokemon.results.length - 0) + 0
+                    );
                     //GET ALL NAMES OF THE POKEMONS
                     const pokemonAuxList = allPokemon.results.map(
-                        (pokemon: any, index: number) => [pokemon.name, index]
+                        (pokemon: any) => [
+                            pokemon.name,
+                            parseInt(
+                                pokemon.url.split('pokemon/')[1].split('/')[0]
+                            ),
+                        ]
                     );
-                    setTotalNumberPokemon(pokemonAuxList.length);
                     // SET STATES REDUX
                     dispatch(setAllPokemons(pokemonAuxList));
 
                     const rightPokemonData = await getPokemon(
-                        allPokemonList[randomNumber][0]
+                        allPokemon.results[randomNumber].name
                     );
                     const rightPokemonMoreData = await getPokemonMoreData(
                         rightPokemonData.species.url
@@ -107,7 +111,6 @@ export default function PokeGuess() {
             getRandomPokemon();
         }
     }, [restartGameTrigger]);
-
     //FUNCTIONS
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>,
@@ -128,7 +131,7 @@ export default function PokeGuess() {
 
             dispatch(setAllPokemons(updatedList));
             const thisPokemonData = await getPokemon(
-                pokemon.toLocaleLowerCase()
+                pokemon.toLocaleLowerCase().trim()
             );
             const morePokemonData = await getPokemonMoreData(
                 thisPokemonData.species.url

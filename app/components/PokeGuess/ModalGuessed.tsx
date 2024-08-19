@@ -40,7 +40,7 @@ export default function ModalGuessed({
                     <h2 className="md:text-4xl sm:text-2xl text-xl">
                         It's{' '}
                         <span className="font-bold">
-                            {firstCharToUpperCase(pokemonName)}
+                            {pokemonName && firstCharToUpperCase(pokemonName)}
                         </span>
                     </h2>
                     <div className="flex items-center sm:justify-around justify-center gap-8 w-full *:px-4 *:py-2 *:rounded-md *:w-full md:*:text-2xl sm:*:text-lg *:text-sm ">

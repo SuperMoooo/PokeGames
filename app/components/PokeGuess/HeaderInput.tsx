@@ -93,9 +93,7 @@ export default function HeaderInput({
                                     <div className="relative w-full h-full grid grid-cols-[auto_1fr] items-center">
                                         <picture className="w-full h-full relative ">
                                             <Image
-                                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-                                                    pokemon[1] + 1
-                                                }.png`}
+                                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon[1]}.png`}
                                                 alt={pokemon}
                                                 width={60}
                                                 height={60}
