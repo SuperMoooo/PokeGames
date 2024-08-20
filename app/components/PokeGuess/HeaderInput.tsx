@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { firstCharToUpperCase } from '../../lib/hooks';
 import GoBack from '../GoBack';
 
@@ -21,7 +21,8 @@ export default function HeaderInput({
 }: HeaderProps) {
     const [filtered, setFiltered] = useState<string[]>([]);
     const [closestPokemon, setClosestPokemon] = useState<string>('');
-    useEffect(() => {
+
+    useMemo(() => {
         const filtered = pokemonList.filter((pokemon) =>
             pokemon[0].toLowerCase().startsWith(pokemonInput.toLowerCase())
         );
@@ -32,6 +33,7 @@ export default function HeaderInput({
             setClosestPokemon(filtered[0]);
         }
     }, [pokemonInput]);
+
     return (
         <section className="flex items-center flex-col text-center gap-4 h-full w-full">
             <div className=" flex items-center flex-col gap-6 w-full">
