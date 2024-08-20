@@ -1,4 +1,4 @@
-# Pokémon Games - Next.js, Tailwind, TypeScript, Redux TK
+# Pokémon Games - Next.js, Tailwind, TypeScript, Redux TK, API
 
 ## Live: https://poke-games-nine.vercel.app/
 
