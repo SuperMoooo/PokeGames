@@ -31,9 +31,9 @@ export default function ModalGuessed({
                     <Image
                         src={pokeImg ? pokeImg : '/pokeball.png'}
                         alt={pokemonName ? pokemonName : 'pokemon'}
-                        width={400}
-                        height={400}
-                        className="md:w-full sm:w-72 w-44"
+                        width={300}
+                        height={300}
+                        className="md:w-80 sm:w-72 w-44 "
                     />
                 </picture>
                 <div className="flex items-center justify-center flex-col  gap-8">

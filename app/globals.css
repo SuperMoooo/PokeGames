@@ -65,8 +65,13 @@ body {
 }
 
 .pokedexBorder {
-    border: 30px solid transparent !important;
+    border: 25px solid transparent !important;
     border-image: url(assets/pokedexBorder.png) 30 !important;
+}
+
+.bgPokedex {
+    background-color: #2a2a2a;
+    border-radius: 1px;
 }
 
 .gongratulations0 {
@@ -126,5 +131,20 @@ body {
     to {
         display: none;
         transform: translateY(2000px) rotate(360deg);
+    }
+}
+
+.animationMoveHorizontal {
+    animation: moveLeft 1s ease-in-out forwards;
+}
+
+@keyframes moveLeft {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-250%);
+        opacity: 1;
     }
 }

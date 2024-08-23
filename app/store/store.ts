@@ -2,8 +2,9 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import rightPokemonSlice from './pokeGuessSlice/rightPokemonSlice';
-import allPokemonSlice from './pokeGuessSlice/allPokemonsSlice';
 import rowsPokemonSlice from './pokeGuessSlice/rowsPokemonSlice';
+import unknownPokemonSlice from './strongerOrWeakerSlice/unknownPokemonSlice';
+import globalSlice from './globalSlice';
 
 const createNoopStorage = () => {
     return {
@@ -31,18 +32,28 @@ const persistConfig = {
     storage,
 };
 const persistConfig2 = {
-    key: 'allPokemon',
-    storage,
-};
-const persistConfig3 = {
     key: 'rowsPokemon',
     storage,
 };
 
+const persistConfig3 = {
+    key: 'unknownPokemon',
+    storage,
+};
+
+const persistConfig4 = {
+    key: 'globalAllPokemons',
+    storage,
+};
+
 const persistedReducers = combineReducers({
+    //PokeGuess Reducers:
     rightPokemon: persistReducer(persistConfig, rightPokemonSlice),
-    allPokemons: persistReducer(persistConfig2, allPokemonSlice),
-    rowsPokemon: persistReducer(persistConfig3, rowsPokemonSlice),
+    rowsPokemon: persistReducer(persistConfig2, rowsPokemonSlice),
+    //StrongerOrWeaker Reducers:
+    unknownPokemon: persistReducer(persistConfig3, unknownPokemonSlice),
+    //Global Reducers:
+    globalAllPokemons: persistReducer(persistConfig4, globalSlice),
 });
 export const store = configureStore({
     reducer: persistedReducers,

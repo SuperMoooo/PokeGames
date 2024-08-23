@@ -1,10 +1,57 @@
+'use client';
 import Image from 'next/image';
 import Footer from './components/Footer';
 import Link from 'next/link';
 import { GAMEMODES } from './lib/constants';
 import Bg from './components/Bg';
+import { useEffect, useState } from 'react';
+import { allPokemons } from './actions/pokemonApiCalls';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    setAuxGlobalAllPokemons,
+    setAuxGlobalAllPokemons2,
+    setGlobalAllPokemons,
+} from './store/globalSlice';
+import Loading from './components/Loading';
 
 export default function Home() {
+    //REDUX STATES
+    const allPokemonList = useSelector(
+        (state: any) => state.globalAllPokemons.globalAllPokemons || []
+    );
+    //STATES
+    const dispacth = useDispatch();
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const getAllPokemonsGlobal = async () => {
+            try {
+                if (allPokemonList.length === 0) {
+                    setLoading(true);
+                    const res = await allPokemons();
+                    const pokemonAuxList = res.results.map((pokemon: any) => [
+                        pokemon.name,
+                        parseInt(
+                            pokemon.url.split('pokemon/')[1].split('/')[0]
+                        ),
+                    ]);
+                    dispacth(setGlobalAllPokemons(pokemonAuxList));
+                    dispacth(setAuxGlobalAllPokemons(pokemonAuxList));
+                    dispacth(setAuxGlobalAllPokemons2(pokemonAuxList));
+                }
+            } catch (err) {
+                console.log(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        getAllPokemonsGlobal();
+    }, []);
+
+    if (loading) {
+        return <Loading />;
+    }
     return (
         <div className="grid grid-rows-[1fr_auto] place-items-center w-full min-h-[100dvh] ">
             <Bg />

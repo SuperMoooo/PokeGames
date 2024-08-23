@@ -18,11 +18,11 @@ import {
     setCorrectPokemonData,
     setCorrectPokemonMoreData,
 } from '@/app/store/pokeGuessSlice/rightPokemonSlice';
-import { setAllPokemons } from '@/app/store/pokeGuessSlice/allPokemonsSlice';
 import {
     resetPokemonRows,
     setPokemonRows,
 } from '@/app/store/pokeGuessSlice/rowsPokemonSlice';
+import { setAuxGlobalAllPokemons } from '@/app/store/globalSlice';
 
 export default function PokeGuess() {
     // REDUX STATES
@@ -33,7 +33,11 @@ export default function PokeGuess() {
         (state: any) => state.rightPokemon.rightPokemonData[0].secondData || []
     );
     const allPokemonList = useSelector(
-        (state: any) => state.allPokemons.allPokeData || []
+        (state: any) => state.globalAllPokemons.globalAllPokemons || []
+    );
+
+    const auxPokemonAllList = useSelector(
+        (state: any) => state.globalAllPokemons.auxGlobalPokemons || []
     );
 
     const dispatch = useDispatch();
@@ -57,6 +61,7 @@ export default function PokeGuess() {
             dispatch(resetPokemonRows([]));
             dispatch(setCorrectPokemonData([]));
             dispatch(setCorrectPokemonMoreData([]));
+            dispatch(setAuxGlobalAllPokemons(allPokemonList));
         };
         const getRandomPokemon = async () => {
             try {
@@ -67,25 +72,12 @@ export default function PokeGuess() {
                     //START LOADING
                     setLoading(true);
 
-                    //FETCH LIST OF ALL POKEMONS
-                    const allPokemon = await allPokemons();
                     const randomNumber = Math.floor(
-                        Math.random() * (allPokemon.results.length - 0) + 0
+                        Math.random() * (allPokemonList.length - 0) + 0
                     );
-                    //GET ALL NAMES OF THE POKEMONS
-                    const pokemonAuxList = allPokemon.results.map(
-                        (pokemon: any) => [
-                            pokemon.name,
-                            parseInt(
-                                pokemon.url.split('pokemon/')[1].split('/')[0]
-                            ),
-                        ]
-                    );
-                    // SET STATES REDUX
-                    dispatch(setAllPokemons(pokemonAuxList));
 
                     const rightPokemonData = await getPokemon(
-                        allPokemon.results[randomNumber].name
+                        allPokemonList[randomNumber][0]
                     );
                     const rightPokemonMoreData = await getPokemonMoreData(
                         rightPokemonData.species.url
@@ -124,18 +116,23 @@ export default function PokeGuess() {
             }
 
             e.preventDefault();
+
+            //REMOVE POKEMON CLICKED FROM LIST
             const updatedList = allPokemonList.filter(
                 (pokemonAux: any) =>
                     pokemonAux[0] !== pokemon.toLocaleLowerCase()
             );
 
-            dispatch(setAllPokemons(updatedList));
+            dispatch(setAuxGlobalAllPokemons(updatedList));
+
+            //GET THIS POKEMON DATA
             const thisPokemonData = await getPokemon(
                 pokemon.toLocaleLowerCase().trim()
             );
             const morePokemonData = await getPokemonMoreData(
                 thisPokemonData.species.url
             );
+
             let habitatValue;
             let rightHabitatValue;
             if (morePokemonData.habitat !== null) {
@@ -233,7 +230,7 @@ export default function PokeGuess() {
             <Bg />
             <main className="z-10 grid grid-rows-[auto_1fr] gap-12">
                 <HeaderInput
-                    pokemonList={allPokemonList}
+                    pokemonList={auxPokemonAllList}
                     setPokemonInput={setPokemonInput}
                     pokemonInput={pokemonInput}
                     handleSubmit={handleSubmit}
