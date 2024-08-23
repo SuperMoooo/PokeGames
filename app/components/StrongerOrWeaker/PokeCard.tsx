@@ -32,19 +32,22 @@ export default function PokeCard({ data, card, showAttack }: CardProps) {
     }, [showAttack, data.attack]);
 
     return (
-        <div className="grid grid-rows-[1fr_auto] gap-4 p-6 w-full h-full  ">
-            <picture className="w-full h-full items-center justify-center flex">
+        <div className="grid grid-rows-[1fr_auto] gap-4 sm:p-6 w-full h-full ">
+            <picture className="w-full items-center justify-center flex sm:h-full ">
                 <Image
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.image}.png`}
                     alt={data.name}
                     width={450}
                     height={450}
                     unoptimized
+                    className="lg:w-[28rem] md:w-[17rem] w-[12rem] h-full"
                 />
             </picture>
             <div className="flex items-center justify-center flex-col gap-4">
-                <h1 className="text-2xl">{firstCharToUpperCase(data.name)}</h1>
-                <h2 className="text-3xl">
+                <h1 className="sm:text-2xl text-md">
+                    {firstCharToUpperCase(data.name)}
+                </h1>
+                <h2 className="sm:text-3xl text-xl">
                     Attack:{' '}
                     <span className="font-bold">
                         {card === 0

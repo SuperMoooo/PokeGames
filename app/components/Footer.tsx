@@ -11,7 +11,7 @@ export default function Footer() {
             >
                 Github
             </Link>
-            <h1 className="text-zinc-500">
+            <h1 className="text-zinc-500 text-center">
                 A big thanks to Nacho, a Pokémon Trainer who helped build this
                 project.
             </h1>

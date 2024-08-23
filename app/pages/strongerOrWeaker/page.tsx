@@ -269,7 +269,7 @@ export default function StrongerOrWeaker() {
                 resetGame={() => setRestartGameTrigger(true)}
             />
             <main className="z-20 flex items-center justify-center w-full flex-col gap-8 overflow-x-hidden">
-                <h1 className="text-3xl">
+                <h1 className="text-3xl text-center">
                     Is{' '}
                     <span className="font-bold text-4xl">
                         {listOfPokemonForStrongerOrWeaker[1]?.name
@@ -301,12 +301,12 @@ export default function StrongerOrWeaker() {
                             );
                         }
                     )}
-                    <UpDownBtn
-                        disableBtn={disableBtn}
-                        handleClick={handleBtnClick}
-                        streak={streak}
-                    />
                 </section>
+                <UpDownBtn
+                    disableBtn={disableBtn}
+                    handleClick={handleBtnClick}
+                    streak={streak}
+                />
             </main>
             <ModalEndGame
                 gameEnded={gameEnded}

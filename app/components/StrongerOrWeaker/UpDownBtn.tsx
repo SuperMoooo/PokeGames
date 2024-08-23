@@ -12,8 +12,8 @@ export default function UpDownBtn({
     streak,
 }: UpDownBtnProps) {
     return (
-        <section className="flex flex-col items-center justify-center gap-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="flex flex-col items-center justify-center gap-6 *:rounded-full *:bg-zinc-900 *:px-4 *:py-2 *:transition-all *:duration-300 *:grid *:grid-cols-[auto_auto] *:justify-between  *:gap-4 *:w-72 *:text-2xl  *:uppercase">
+        <section className="flex flex-col items-center justify-center gap-6 sm:absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full">
+            <div className="flex flex-col items-center justify-center gap-6 *:rounded-full *:bg-zinc-900 *:px-4 *:py-2 *:transition-all *:duration-300 *:grid *:grid-cols-[auto_auto] *:justify-between  *:gap-4 md:*:w-72 sm:*:w-52 *:w-64   *:text-2xl  *:uppercase">
                 <button
                     className={` ${
                         disableBtn
