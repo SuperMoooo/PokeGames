@@ -83,7 +83,10 @@ export default function LeaderBoard() {
                                 key={data._id}
                                 className="flex items-center justify-center w-full gap-6 border-b border-zinc-500 py-1"
                             >
-                                <h1 className={`text-2xl w-12 text-[${color}]`}>
+                                <h1
+                                    className={`text-2xl w-12`}
+                                    style={{ color: color }}
+                                >
                                     {index + 1}
                                 </h1>
                                 <h1 className="text-2xl flex-1">{data.name}</h1>
