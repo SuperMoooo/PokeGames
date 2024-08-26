@@ -28,5 +28,11 @@ if (process.env.NODE_ENV === 'development') {
 
 // Export an async function instead of a promise directly
 export const getClient = async () => {
-    return clientPromise;
+    try {
+        await clientPromise;
+        return clientPromise;
+    } catch (error) {
+        console.error('Failed to connect to MongoDB', error);
+        throw error;
+    }
 };
