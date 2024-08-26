@@ -1,3 +1,4 @@
+'use server';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 const uri = `${process.env.NEXT_PUBLIC_DB_FIRST_URI}${process.env.NEXT_PUBLIC_DB_PASSWORD}${process.env.NEXT_PUBLIC_DB_LAST_URI}`;
