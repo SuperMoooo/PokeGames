@@ -58,11 +58,17 @@ export default function ModalEndGame({
                         Play Again
                     </button>
 
-                    <button className="hover:bg-blue-400 bg-blue-500 transition-all duration-300 whitespace-nowrap ">
+                    <button
+                        onClick={restartGame}
+                        className="hover:bg-blue-400 bg-blue-500 transition-all duration-300 whitespace-nowrap "
+                    >
                         <Link href="/pages/leaderboard">LeaderBoard</Link>
                     </button>
 
-                    <button className="hover:bg-blue-400 bg-blue-500 transition-all duration-300 whitespace-nowrap ">
+                    <button
+                        onClick={restartGame}
+                        className="hover:bg-blue-400 bg-blue-500 transition-all duration-300 whitespace-nowrap "
+                    >
                         <Link href={GAMEMODES[0].link}>Next Game</Link>
                     </button>
                 </div>

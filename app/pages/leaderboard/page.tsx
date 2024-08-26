@@ -14,8 +14,10 @@ export default function LeaderBoard() {
             try {
                 setLoading(true);
                 const data = await readDataFromDB();
-
-                setLeaderboardData(data);
+                const ordenedData = data.sort(
+                    (a: any, b: any) => b.streak - a.streak
+                );
+                setLeaderboardData(ordenedData);
             } catch (err) {
                 console.log(err);
             } finally {

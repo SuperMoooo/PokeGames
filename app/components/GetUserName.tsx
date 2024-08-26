@@ -43,10 +43,12 @@ export default function GetUserName() {
             }`}
         >
             <form
-                className="flex flex-col items-center justify-center gap-6"
+                className="flex flex-col items-center justify-center gap-6 p-10"
                 onSubmit={(e) => handleClick(e)}
             >
-                <label className="text-3xl">Enter your Username:</label>
+                <label className="text-3xl text-center">
+                    Enter your Username:
+                </label>
                 <p className="font-thin text-xl">
                     {nameExists ? 'Username already taken!' : ''}
                 </p>
