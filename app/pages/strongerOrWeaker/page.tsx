@@ -1,7 +1,13 @@
 'use client';
+import {
+    addStreakToDB,
+    readDataFromDB,
+    updateData,
+} from '@/app/actions/databaseActions';
 import { getPokemon } from '@/app/actions/pokemonApiCalls';
 import Bg from '@/app/components/Bg';
 import Footer from '@/app/components/Footer';
+import GetUserName from '@/app/components/GetUserName';
 import GoBack from '@/app/components/GoBack';
 import Loading from '@/app/components/Loading';
 import ModalEndGame from '@/app/components/StrongerOrWeaker/ModalEndGame';
@@ -30,6 +36,10 @@ export default function StrongerOrWeaker() {
 
     const allPokemonsGlobal = useSelector(
         (state: any) => state.globalAllPokemons.globalAllPokemons || []
+    );
+
+    const playerName = useSelector(
+        (state: any) => state.globalAllPokemons.playerName || ''
     );
 
     //STATES
@@ -90,6 +100,7 @@ export default function StrongerOrWeaker() {
                         setResult('YOU LOSE');
                         setTimeout(() => {
                             setGameEnded(true);
+                            updateData(playerName, streak);
                         }, 4000);
                     }
                 } else if (value === 2) {
@@ -107,6 +118,7 @@ export default function StrongerOrWeaker() {
                         setResult('YOU LOSE');
                         setTimeout(() => {
                             setGameEnded(true);
+                            updateData(playerName, streak);
                         }, 4000);
                     }
                 } else {
@@ -125,6 +137,7 @@ export default function StrongerOrWeaker() {
                         setResult('YOU LOSE');
                         setTimeout(() => {
                             setGameEnded(true);
+                            updateData(playerName, streak);
                         }, 4000);
                     }
                 }
@@ -253,17 +266,21 @@ export default function StrongerOrWeaker() {
         } else {
             getPokemonsStats();
         }
+
+        const yo = async () => {
+            //const yo = await readDataFromDB();
+        };
+        yo();
     }, [restartGameTrigger]);
 
     if (loading) {
         return <Loading />;
     }
 
-    // REFACTOR UI LIKE HIGHER OR LOWER
     return (
         <div className="grid grid-rows-[auto_1fr_auto] w-full min-h-[100dvh] gap-6 p-6">
             <Bg />
-
+            <GetUserName />
             <GoBack
                 resetBtn={true}
                 resetGame={() => setRestartGameTrigger(true)}

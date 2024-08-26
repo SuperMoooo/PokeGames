@@ -6,6 +6,7 @@ export const globalSlice = createSlice({
         globalAllPokemons: [],
         auxGlobalPokemons: [],
         auxGlobalPokemons2: [],
+        playerName: '',
     },
     reducers: {
         setGlobalAllPokemons: (state, action) => {
@@ -17,6 +18,9 @@ export const globalSlice = createSlice({
         setAuxGlobalAllPokemons2: (state, action) => {
             state.auxGlobalPokemons2 = action.payload;
         },
+        setPlayerName: (state, action) => {
+            state.playerName = action.payload;
+        },
     },
 });
 
@@ -24,6 +28,7 @@ export const {
     setGlobalAllPokemons,
     setAuxGlobalAllPokemons,
     setAuxGlobalAllPokemons2,
+    setPlayerName,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

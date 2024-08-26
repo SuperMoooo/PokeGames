@@ -13,6 +13,7 @@ import {
     setGlobalAllPokemons,
 } from './store/globalSlice';
 import Loading from './components/Loading';
+import GetUserName from './components/GetUserName';
 
 export default function Home() {
     //REDUX STATES
@@ -55,6 +56,7 @@ export default function Home() {
     return (
         <div className="grid grid-rows-[1fr_auto] place-items-center w-full min-h-[100dvh] ">
             <Bg />
+            <GetUserName />
             <main className="flex items-center justify-around flex-col lg:flex-row w-full h-full z-10">
                 {GAMEMODES.map((game, index) => {
                     return (
@@ -82,6 +84,16 @@ export default function Home() {
                                         Play
                                     </button>
                                 </Link>
+                                {game.name === 'Stronger or Weaker' && (
+                                    <Link
+                                        href="/pages/leaderboard"
+                                        className="w-full"
+                                    >
+                                        <button className="lg:hidden block px-4 py-2 rounded-md w-full bg-blue-500 hover:bg-blue-400 transition-all duration-300">
+                                            Leaderboard
+                                        </button>
+                                    </Link>
+                                )}
                             </div>
 
                             <Link href={game.link} className="w-full">
@@ -89,6 +101,16 @@ export default function Home() {
                                     Play
                                 </button>
                             </Link>
+                            {game.name === 'Stronger or Weaker' && (
+                                <Link
+                                    href="/pages/leaderboard"
+                                    className="w-full"
+                                >
+                                    <button className="lg:block hidden px-4 py-2 rounded-md w-full bg-blue-500 hover:bg-blue-400 transition-all duration-300">
+                                        Leaderboard
+                                    </button>
+                                </Link>
+                            )}
                         </section>
                     );
                 })}

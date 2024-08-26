@@ -53,9 +53,13 @@ export default function ModalEndGame({
                 <div className="flex items-center sm:justify-around justify-center gap-8 w-full *:px-4 *:py-2 *:rounded-md *:w-full md:*:text-2xl sm:*:text-lg *:text-sm ">
                     <button
                         onClick={restartGame}
-                        className="hover:border-blue-400 hover:border-2 border-blue-500 border "
+                        className="hover:bg-zinc-400  bg-zinc-500 transition-all duration-300"
                     >
                         Play Again
+                    </button>
+
+                    <button className="hover:bg-blue-400 bg-blue-500 transition-all duration-300 whitespace-nowrap ">
+                        <Link href="/pages/leaderboard">LeaderBoard</Link>
                     </button>
 
                     <button className="hover:bg-blue-400 bg-blue-500 transition-all duration-300 whitespace-nowrap ">

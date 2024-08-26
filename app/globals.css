@@ -134,17 +134,24 @@ body {
     }
 }
 
-.animationMoveHorizontal {
-    animation: moveLeft 1s ease-in-out forwards;
+.userExists {
+    animation: shake 0.5s ease-in-out forwards;
 }
 
-@keyframes moveLeft {
+@keyframes shake {
     0% {
         transform: translateX(0);
-        opacity: 0;
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-10px);
     }
     100% {
-        transform: translateX(-250%);
-        opacity: 1;
+        transform: translateX(0);
     }
 }
