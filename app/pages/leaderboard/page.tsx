@@ -16,11 +16,7 @@ export default function LeaderBoard() {
                 setLoading(true);
                 const data = await readDataFromDB();
 
-                const simplifiedData = data.map((item: any) => ({
-                    ...item,
-                    _id: item._id.toString(), // Convert ObjectId to string
-                }));
-                setLeaderboardData(simplifiedData);
+                setLeaderboardData(data);
             } catch (err) {
                 console.log(err);
             } finally {

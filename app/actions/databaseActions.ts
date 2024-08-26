@@ -17,8 +17,11 @@ export const readDataFromDB = async () => {
     const db = client.db('playersStreaks');
     const collection = db.collection('streaks');
     const data = await collection.find({}).toArray();
-
-    return data;
+    const simplifiedData = data.map((item: any) => ({
+        ...item,
+        _id: item._id.toString(), // Convert ObjectId to string
+    }));
+    return simplifiedData;
 };
 
 // UPDATE THE DATA IF STREAK IS HIGHER THAN THE CURRENT ONE
