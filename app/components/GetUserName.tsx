@@ -19,7 +19,6 @@ export default function GetUserName() {
     const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const dataInDb = await readDataFromDB();
-        console.log(JSON.stringify(dataInDb));
         if (!JSON.stringify(dataInDb).includes(inputValue)) {
             dispatch(setPlayerName(inputValue));
             setNameExists(false);
