@@ -13,23 +13,21 @@ const options = {
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-if (process.env.NODE_ENV === 'production') {
-    // In development mode, use a global variable so the MongoClient is not re-created every time
-    if (!(global as any)._mongoClientPromise) {
-        client = new MongoClient(uri, options);
-        (global as any)._mongoClientPromise = client.connect();
-    }
-    clientPromise = (global as any)._mongoClientPromise;
-} else {
-    // In production mode, avoid using a global variable
-    client = new MongoClient(uri, options);
-    clientPromise = client.connect();
-}
-
 // Export an async function instead of a promise directly
 export const getClient = async () => {
     try {
-        await clientPromise;
+        if (process.env.NODE_ENV === 'development') {
+            // In development mode, use a global variable so the MongoClient is not re-created every time
+            if (!(global as any)._mongoClientPromise) {
+                client = new MongoClient(uri, options);
+                (global as any)._mongoClientPromise = client.connect();
+            }
+            clientPromise = (global as any)._mongoClientPromise;
+        } else {
+            // In production mode, avoid using a global variable
+            client = new MongoClient(uri, options);
+            clientPromise = client.connect();
+        }
         return clientPromise;
     } catch (error) {
         console.error('Failed to connect to MongoDB', error);
