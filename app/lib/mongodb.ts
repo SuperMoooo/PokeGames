@@ -13,7 +13,7 @@ const options = {
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'production') {
     // In development mode, use a global variable so the MongoClient is not re-created every time
     if (!(global as any)._mongoClientPromise) {
         client = new MongoClient(uri, options);
