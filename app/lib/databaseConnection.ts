@@ -1,11 +1,11 @@
-import clientPromise from './mongodb';
+import { getClient } from '../lib/mongodb';
 
 async function run() {
     let client; // Declare client variable to close it later
 
     try {
         // Get the connected client from clientPromise
-        client = await clientPromise;
+        client = await getClient();
 
         // Send a ping to confirm a successful connection (optional)
         await client.db('admin').command({ ping: 1 });
