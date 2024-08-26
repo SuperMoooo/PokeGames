@@ -18,7 +18,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={raleway.className}>
-                <ClientProvider>{children}</ClientProvider>~
+                <ClientProvider>{children}</ClientProvider>
                 <Analytics />
             </body>
         </html>

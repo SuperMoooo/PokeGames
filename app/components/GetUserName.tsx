@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPlayerName } from '../store/globalSlice';
 import { readDataFromDB } from '../actions/databaseActions';
 
-interface GetUserProps {}
-
 export default function GetUserName() {
     const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState<string>('');
     const [nameExists, setNameExists] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const hasUserName = useSelector(
         (state: any) => state.globalAllPokemons.playerName
     )
@@ -17,13 +16,20 @@ export default function GetUserName() {
         : false;
 
     const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const dataInDb = await readDataFromDB();
-        if (!dataInDb.includes(inputValue)) {
-            dispatch(setPlayerName(inputValue));
-            setNameExists(false);
-        } else {
-            setNameExists(true);
+        try {
+            setLoading(true);
+            e.preventDefault();
+            const dataInDb = await readDataFromDB();
+            if (!dataInDb.includes(inputValue)) {
+                dispatch(setPlayerName(inputValue));
+                setNameExists(false);
+            } else {
+                setNameExists(true);
+            }
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setLoading(false);
         }
     };
     return (
@@ -48,6 +54,11 @@ export default function GetUserName() {
                         nameExists ? 'border-red-600 userExists' : ''
                     }`}
                 />
+                {loading && (
+                    <div className="flex items-center justify-center w-full">
+                        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+                    </div>
+                )}
                 <button
                     type="submit"
                     className=" px-4 py-2 rounded-md w-full bg-blue-500 hover:bg-blue-400 transition-all duration-300"
