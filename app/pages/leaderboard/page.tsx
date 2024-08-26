@@ -74,6 +74,8 @@ export default function LeaderBoard() {
                             case 3:
                                 color = '#ce8946';
                                 break;
+                            default:
+                                color = '#71717a';
                         }
 
                         return (
