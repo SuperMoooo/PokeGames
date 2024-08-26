@@ -1,10 +1,10 @@
 'use server';
 
-import clientPromise from '../lib/mongodb';
+import { getClient } from '../lib/mongodb';
 
 // ADD STREAK TO THE DATABASE
 export const addStreakToDB = async (name: string, streak: number) => {
-    const client = await clientPromise;
+    const client = await getClient();
     const db = client.db('playersStreaks');
 
     const collection = db.collection('streaks');
@@ -13,7 +13,7 @@ export const addStreakToDB = async (name: string, streak: number) => {
 
 // READ THE DATA FROM THE DATABASE
 export const readDataFromDB = async () => {
-    const client = await clientPromise;
+    const client = await getClient();
     const db = client.db('playersStreaks');
     const collection = db.collection('streaks');
     const data = await collection.find({}).toArray();
@@ -27,7 +27,7 @@ export const readDataFromDB = async () => {
 // UPDATE THE DATA IF STREAK IS HIGHER THAN THE CURRENT ONE
 
 export async function updateData(name: string, streak: number) {
-    const client = await clientPromise;
+    const client = await getClient();
     const db = client.db('playersStreaks');
     const collection = db.collection('streaks');
 

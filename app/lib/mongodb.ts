@@ -1,4 +1,3 @@
-'use server';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 const uri = `${process.env.NEXT_PUBLIC_DB_FIRST_URI}${process.env.NEXT_PUBLIC_DB_PASSWORD}${process.env.NEXT_PUBLIC_DB_LAST_URI}`;
@@ -11,8 +10,8 @@ const options = {
     },
 };
 
-let client: any;
-let clientPromise: any;
+let client: MongoClient;
+let clientPromise: Promise<MongoClient>;
 
 if (process.env.NODE_ENV === 'development') {
     // In development mode, use a global variable so the MongoClient is not re-created every time
@@ -27,4 +26,7 @@ if (process.env.NODE_ENV === 'development') {
     clientPromise = client.connect();
 }
 
-export default clientPromise;
+// Export an async function instead of a promise directly
+export const getClient = async () => {
+    return clientPromise;
+};
