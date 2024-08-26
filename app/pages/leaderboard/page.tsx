@@ -63,26 +63,25 @@ export default function LeaderBoard() {
                         </div>
                     )}
                     {leaderboardData.map((data: any, index: number) => {
+                        let color = '#71717a';
+                        switch (index + 1) {
+                            case 1:
+                                color = '#efbf04';
+                                break;
+                            case 2:
+                                color = '#c4c4c4';
+                                break;
+                            case 3:
+                                color = '#ce8946';
+                                break;
+                        }
+
                         return (
                             <section
                                 key={data._id}
                                 className="flex items-center justify-center w-full gap-6 border-b border-zinc-500 py-1"
                             >
-                                <h1
-                                    className={`text-2xl w-12 ${
-                                        index + 1 === 1
-                                            ? 'text-[#efbf04]'
-                                            : 'text-zinc-500'
-                                    } ${
-                                        index + 1 === 2
-                                            ? 'text-[#c4c4c4]'
-                                            : 'text-zinc-500'
-                                    } ${
-                                        index + 1 === 3
-                                            ? 'text-[#ce8946]'
-                                            : 'text-zinc-500'
-                                    }`}
-                                >
+                                <h1 className={`text-2xl w-12 text-[${color}]`}>
                                     {index + 1}
                                 </h1>
                                 <h1 className="text-2xl flex-1">{data.name}</h1>
