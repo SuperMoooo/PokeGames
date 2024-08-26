@@ -20,7 +20,11 @@ export default function GetUserName() {
             setLoading(true);
             e.preventDefault();
             const dataInDb = await readDataFromDB();
-            if (!dataInDb.includes(inputValue)) {
+            console.log(dataInDb);
+            const repeatedValue = dataInDb.some(
+                (item) => item.name === inputValue
+            );
+            if (!repeatedValue) {
                 dispatch(setPlayerName(inputValue));
                 setNameExists(false);
             } else {
