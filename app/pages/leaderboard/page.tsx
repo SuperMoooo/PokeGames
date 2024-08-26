@@ -4,7 +4,6 @@ import Bg from '@/app/components/Bg';
 import Footer from '@/app/components/Footer';
 import GetUserName from '@/app/components/GetUserName';
 import GoBack from '@/app/components/GoBack';
-import Loading from '@/app/components/Loading';
 import React, { useEffect, useState } from 'react';
 
 export default function LeaderBoard() {
@@ -26,9 +25,6 @@ export default function LeaderBoard() {
         getDataDB();
     }, []);
 
-    if (loading) {
-        <Loading />;
-    }
     return (
         <div className="grid grid-rows-[auto_1fr_auto] w-full min-h-[100dvh] gap-6 p-6">
             <Bg />
@@ -61,7 +57,11 @@ export default function LeaderBoard() {
                             </svg>
                         </picture>
                     </header>
-
+                    {loading && (
+                        <div className="flex items-center justify-center w-full">
+                            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+                        </div>
+                    )}
                     {leaderboardData.map((data: any, index: number) => {
                         return (
                             <section
