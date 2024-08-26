@@ -14,7 +14,9 @@ export default function GetUserName() {
     )
         ? true
         : false;
-
+    console.log('DB First URI:', process.env.NEXT_PUBLIC_DB_FIRST_URI);
+    console.log('DB Password:', process.env.NEXT_PUBLIC_DB_PASSWORD);
+    console.log('DB Last URI:', process.env.NEXT_PUBLIC_DB_LAST_URI);
     const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             setLoading(true);

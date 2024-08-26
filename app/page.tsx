@@ -49,7 +49,6 @@ export default function Home() {
 
         getAllPokemonsGlobal();
     }, []);
-
     if (loading) {
         return <Loading />;
     }
