@@ -300,22 +300,24 @@ export default function StrongerOrWeaker() {
                 <section className=" flex justify-between items-center w-full h-full overflow-x-hidden relative ">
                     {listOfPokemonForStrongerOrWeaker.map(
                         (pokemon: any, index: number) => {
-                            return (
-                                <div
-                                    key={pokemon.name}
-                                    className={`transition-transform duration-300  ${
-                                        index > 1
-                                            ? 'translate-x-[100%] hidden'
-                                            : ''
-                                    }`}
-                                >
-                                    <PokeCard
-                                        data={pokemon}
-                                        card={index}
-                                        showAttack={showAttackUnknown}
-                                    />
-                                </div>
-                            );
+                            if (index < 2) {
+                                return (
+                                    <div
+                                        key={pokemon.name}
+                                        className={`transition-transform duration-300  ${
+                                            index > 1
+                                                ? 'translate-x-[100%] hidden'
+                                                : ''
+                                        }`}
+                                    >
+                                        <PokeCard
+                                            data={pokemon}
+                                            card={index}
+                                            showAttack={showAttackUnknown}
+                                        />
+                                    </div>
+                                );
+                            }
                         }
                     )}
                 </section>
