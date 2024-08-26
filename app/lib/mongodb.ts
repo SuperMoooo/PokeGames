@@ -12,7 +12,7 @@ const options = {
 };
 
 let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
+let clientPromise: any;
 
 // Export an async function instead of a promise directly
 export const getClient = async () => {
@@ -27,7 +27,7 @@ export const getClient = async () => {
         } else {
             // In production mode, avoid using a global variable
             client = new MongoClient(uri, options);
-            clientPromise = client.connect();
+            clientPromise = await client.connect();
         }
         return clientPromise;
     } catch (error) {
