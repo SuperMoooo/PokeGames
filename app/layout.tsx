@@ -3,6 +3,7 @@ import { Raleway } from 'next/font/google';
 import './globals.css';
 import ClientProvider from './components/ClientProvider';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 const raleway = Raleway({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
             <body className={raleway.className}>
                 <ClientProvider>{children}</ClientProvider>
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
