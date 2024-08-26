@@ -1,9 +1,8 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayerName } from '../store/globalSlice';
 import { readDataFromDB } from '../actions/databaseActions';
-import { getClient } from '../lib/mongodb';
 
 export default function GetUserName() {
     const dispatch = useDispatch();
@@ -37,18 +36,6 @@ export default function GetUserName() {
         }
     };
 
-    useEffect(() => {
-        const checkConnection = async () => {
-            try {
-                const data = await getClient();
-                console.log(data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        checkConnection();
-    }, []);
     return (
         <main
             className={`fixed top-0 left-0 w-full min-h-[100dvh]  items-center justify-center bg-black/90 z-50 ${
