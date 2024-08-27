@@ -5,7 +5,8 @@ export const globalSlice = createSlice({
     initialState: {
         globalAllPokemons: [],
         auxGlobalPokemons: [],
-        auxGlobalPokemons2: [],
+        auxGlobalPokemonsStrongerOrWeaker: [],
+        auxGlobalPokemonsBlur: [],
         playerName: '',
     },
     reducers: {
@@ -15,8 +16,11 @@ export const globalSlice = createSlice({
         setAuxGlobalAllPokemons: (state, action) => {
             state.auxGlobalPokemons = action.payload;
         },
-        setAuxGlobalAllPokemons2: (state, action) => {
-            state.auxGlobalPokemons2 = action.payload;
+        setAuxGlobalAllPokemonsStrongerOrWeaker: (state, action) => {
+            state.auxGlobalPokemonsStrongerOrWeaker = action.payload;
+        },
+        setAuxGlobalAllPokemonsBlur: (state, action) => {
+            state.auxGlobalPokemonsBlur = action.payload;
         },
         setPlayerName: (state, action) => {
             state.playerName = action.payload;
@@ -27,7 +31,8 @@ export const globalSlice = createSlice({
 export const {
     setGlobalAllPokemons,
     setAuxGlobalAllPokemons,
-    setAuxGlobalAllPokemons2,
+    setAuxGlobalAllPokemonsStrongerOrWeaker,
+    setAuxGlobalAllPokemonsBlur,
     setPlayerName,
 } = globalSlice.actions;
 

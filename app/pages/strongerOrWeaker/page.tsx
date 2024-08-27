@@ -14,7 +14,7 @@ import ModalEndGame from '@/app/components/StrongerOrWeaker/ModalEndGame';
 import PokeCard from '@/app/components/StrongerOrWeaker/PokeCard';
 import UpDownBtn from '@/app/components/StrongerOrWeaker/UpDownBtn';
 import { firstCharToUpperCase } from '@/app/lib/hooks';
-import { setAuxGlobalAllPokemons2 } from '@/app/store/globalSlice';
+import { setAuxGlobalAllPokemonsStrongerOrWeaker } from '@/app/store/globalSlice';
 import {
     removeElement,
     resetList,
@@ -31,7 +31,8 @@ export default function StrongerOrWeaker() {
     );
 
     const allPokemonsList = useSelector(
-        (state: any) => state.globalAllPokemons.auxGlobalPokemons2 || []
+        (state: any) =>
+            state.globalAllPokemons.auxGlobalPokemonsStrongerOrWeaker || []
     );
 
     const allPokemonsGlobal = useSelector(
@@ -72,7 +73,9 @@ export default function StrongerOrWeaker() {
                     (pokemonAux: any) =>
                         pokemonAux[0] !== allPokemonsList[randomNumberAux][0]
                 );
-                dispatch(setAuxGlobalAllPokemons2(updatedAuxList));
+                dispatch(
+                    setAuxGlobalAllPokemonsStrongerOrWeaker(updatedAuxList)
+                );
                 const auxPoke = {
                     name: morePokemon.name,
                     image: allPokemonsList[randomNumberAux][1],
@@ -161,7 +164,9 @@ export default function StrongerOrWeaker() {
     useEffect(() => {
         const restartGame = () => {
             dispatch(resetList([]));
-            dispatch(setAuxGlobalAllPokemons2(allPokemonsGlobal));
+            dispatch(
+                setAuxGlobalAllPokemonsStrongerOrWeaker(allPokemonsGlobal)
+            );
             setRestartGameTrigger(false);
             getPokemonsStats();
             setGameEnded(false);
@@ -195,7 +200,9 @@ export default function StrongerOrWeaker() {
                         (pokemonAux: any) =>
                             pokemonAux[0] !== allPokemonsList[randomNumber][0]
                     );
-                    dispatch(setAuxGlobalAllPokemons2(updatedAuxList));
+                    dispatch(
+                        setAuxGlobalAllPokemonsStrongerOrWeaker(updatedAuxList)
+                    );
 
                     const unknownPoke = await getPokemon(
                         allPokemonsList[randomNumber2][0]
@@ -205,7 +212,9 @@ export default function StrongerOrWeaker() {
                         (pokemonAux: any) =>
                             pokemonAux[0] !== allPokemonsList[randomNumber2][0]
                     );
-                    dispatch(setAuxGlobalAllPokemons2(updatedAuxList));
+                    dispatch(
+                        setAuxGlobalAllPokemonsStrongerOrWeaker(updatedAuxList)
+                    );
 
                     const unknownPoke2 = await getPokemon(
                         allPokemonsList[randomNumber3][0]
@@ -214,7 +223,9 @@ export default function StrongerOrWeaker() {
                         (pokemonAux: any) =>
                             pokemonAux[0] !== allPokemonsList[randomNumber3][0]
                     );
-                    dispatch(setAuxGlobalAllPokemons2(updatedAuxList));
+                    dispatch(
+                        setAuxGlobalAllPokemonsStrongerOrWeaker(updatedAuxList)
+                    );
 
                     const unknownPoke3 = await getPokemon(
                         allPokemonsList[randomNumber4][0]
@@ -223,7 +234,9 @@ export default function StrongerOrWeaker() {
                         (pokemonAux: any) =>
                             pokemonAux[0] !== allPokemonsList[randomNumber4][0]
                     );
-                    dispatch(setAuxGlobalAllPokemons2(updatedAuxList));
+                    dispatch(
+                        setAuxGlobalAllPokemonsStrongerOrWeaker(updatedAuxList)
+                    );
 
                     //SET THE STATS OF THE FIRST TWO POKEMONS
                     const auxPoke = {

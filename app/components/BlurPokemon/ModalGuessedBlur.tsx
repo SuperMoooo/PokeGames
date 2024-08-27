@@ -11,7 +11,7 @@ interface ModalProps {
     restartGame: () => void;
 }
 
-export default function ModalGuessed({
+export default function ModalGuessedBlur({
     pokeImg,
     pokemonName,
     gameEnded,
@@ -29,11 +29,17 @@ export default function ModalGuessed({
                         Gongratulations!!!
                     </h1>
                     <Image
-                        src={pokeImg ? pokeImg : '/pokeball.png'}
+                        src={
+                            pokeImg
+                                ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeImg}.png`
+                                : '/pokeball.png'
+                        }
                         alt={pokemonName ? pokemonName : 'pokemon'}
                         width={300}
                         height={300}
                         className="md:w-80 sm:w-72 w-44 "
+                        unoptimized
+                        priority
                     />
                 </picture>
                 <div className="flex items-center justify-center flex-col  gap-8">
@@ -55,7 +61,7 @@ export default function ModalGuessed({
                             onClick={restartGame}
                             className="hover:bg-blue-400 bg-blue-500 transition-all duration-300 whitespace-nowrap "
                         >
-                            <Link href={GAMEMODES[1].link}>Next Game</Link>
+                            <Link href={GAMEMODES[2].link}>Next Game</Link>
                         </button>
                     </div>
                 </div>

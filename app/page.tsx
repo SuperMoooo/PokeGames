@@ -9,17 +9,14 @@ import { allPokemons } from './actions/pokemonApiCalls';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     setAuxGlobalAllPokemons,
-    setAuxGlobalAllPokemons2,
+    setAuxGlobalAllPokemonsBlur,
+    setAuxGlobalAllPokemonsStrongerOrWeaker,
     setGlobalAllPokemons,
 } from './store/globalSlice';
 import Loading from './components/Loading';
 import GetUserName from './components/GetUserName';
 
 export default function Home() {
-    //REDUX STATES
-    const allPokemonList = useSelector(
-        (state: any) => state.globalAllPokemons.globalAllPokemons || []
-    );
     //STATES
     const dispacth = useDispatch();
     const [loading, setLoading] = useState<boolean>(true);
@@ -27,19 +24,18 @@ export default function Home() {
     useEffect(() => {
         const getAllPokemonsGlobal = async () => {
             try {
-                if (allPokemonList.length === 0) {
-                    setLoading(true);
-                    const res = await allPokemons();
-                    const pokemonAuxList = res.results.map((pokemon: any) => [
-                        pokemon.name,
-                        parseInt(
-                            pokemon.url.split('pokemon/')[1].split('/')[0]
-                        ),
-                    ]);
-                    dispacth(setGlobalAllPokemons(pokemonAuxList));
-                    dispacth(setAuxGlobalAllPokemons(pokemonAuxList));
-                    dispacth(setAuxGlobalAllPokemons2(pokemonAuxList));
-                }
+                setLoading(true);
+                const res = await allPokemons();
+                const pokemonAuxList = res.results.map((pokemon: any) => [
+                    pokemon.name,
+                    parseInt(pokemon.url.split('pokemon/')[1].split('/')[0]),
+                ]);
+                dispacth(setGlobalAllPokemons(pokemonAuxList));
+                dispacth(setAuxGlobalAllPokemons(pokemonAuxList));
+                dispacth(
+                    setAuxGlobalAllPokemonsStrongerOrWeaker(pokemonAuxList)
+                );
+                dispacth(setAuxGlobalAllPokemonsBlur(pokemonAuxList));
             } catch (err) {
                 console.log(err);
             } finally {

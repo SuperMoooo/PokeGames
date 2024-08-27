@@ -8,7 +8,7 @@ interface GoBackProps {
 
 export default function GoBack({ resetBtn, resetGame }: GoBackProps) {
     return (
-        <div className="w-full flex items-center justify-center z-20 gap-6">
+        <div className="w-full flex items-center justify-center z-20 gap-6 *:whitespace-nowrap">
             <button className="bg-zinc-600 rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-zinc-500 transition-colors duration-300">
                 <Link href="/" className="flex items-center gap-2">
                     <svg

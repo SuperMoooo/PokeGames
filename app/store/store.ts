@@ -5,6 +5,8 @@ import rightPokemonSlice from './pokeGuessSlice/rightPokemonSlice';
 import rowsPokemonSlice from './pokeGuessSlice/rowsPokemonSlice';
 import unknownPokemonSlice from './strongerOrWeakerSlice/unknownPokemonSlice';
 import globalSlice from './globalSlice';
+import blurPokemonSlice from './blurImgSlice/blurPokemonSlice';
+import blurRowsSlice from './blurImgSlice/blurRowsSlice';
 
 const createNoopStorage = () => {
     return {
@@ -46,6 +48,15 @@ const persistConfig4 = {
     storage,
 };
 
+const persistConfig5 = {
+    key: 'blurPokemon',
+    storage,
+};
+const persistConfig6 = {
+    key: 'blurRows',
+    storage,
+};
+
 const persistedReducers = combineReducers({
     //PokeGuess Reducers:
     rightPokemon: persistReducer(persistConfig, rightPokemonSlice),
@@ -54,6 +65,9 @@ const persistedReducers = combineReducers({
     unknownPokemon: persistReducer(persistConfig3, unknownPokemonSlice),
     //Global Reducers:
     globalAllPokemons: persistReducer(persistConfig4, globalSlice),
+    //BlurImg Reducers:
+    blurPokemon: persistReducer(persistConfig5, blurPokemonSlice),
+    blurRows: persistReducer(persistConfig6, blurRowsSlice),
 });
 export const store = configureStore({
     reducer: persistedReducers,

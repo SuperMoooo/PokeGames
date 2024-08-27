@@ -64,3 +64,15 @@ export type PokeCardType = {
     image: string;
     attack: number;
 };
+
+//BLUR POKEMON
+
+export type PokemonBlur = {
+    name: string;
+    img: number;
+};
+
+export type RowBlur = [
+    { img: number; value: null },
+    { name: string; value: string }
+];
