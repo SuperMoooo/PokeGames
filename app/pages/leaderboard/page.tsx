@@ -33,11 +33,13 @@ export default function LeaderBoard() {
             <GetUserName />
             <GoBack resetBtn={false} resetGame={() => null} />
             <main className="flex items-center flex-col justify-start w-full h-full z-30 mt-10">
-                <section className="w-1/2 gap-10 flex items-center justify-center flex-col">
+                <section className="md:w-1/2 sm:w-2/3 w-full gap-10 flex items-center justify-center flex-col">
                     <header className="flex items-center justify-center w-full  gap-6">
-                        <h1 className="font-thin text-2xl w-12">Nº</h1>
-                        <h1 className="text-4xl flex-1">Name </h1>
-                        <picture className="w-12 text-center">
+                        <h1 className="font-thin sm:text-2xl text-lg sm:w-12 w-8">
+                            Nº
+                        </h1>
+                        <h1 className="sm:text-4xl text-2xl flex-1">Name </h1>
+                        <picture className="sm:w-12 w-10 text-center">
                             <svg
                                 fill="#c9901c"
                                 strokeWidth={1}
@@ -86,13 +88,15 @@ export default function LeaderBoard() {
                                 className="flex items-center justify-center w-full gap-6 border-b border-zinc-500 py-1"
                             >
                                 <h1
-                                    className={`text-2xl w-12`}
+                                    className={`sm:text-2xl text-lg sm:w-12 w-8`}
                                     style={{ color: color }}
                                 >
                                     {index + 1}
                                 </h1>
-                                <h1 className="text-2xl flex-1">{data.name}</h1>
-                                <h1 className="w-12 text-center text-xl font-bold">
+                                <h1 className="sm:text-2xl text-xl flex-1">
+                                    {data.name}
+                                </h1>
+                                <h1 className="sm:w-12 w-10 text-center text-xl font-bold">
                                     {data.streak}
                                 </h1>
                             </section>
