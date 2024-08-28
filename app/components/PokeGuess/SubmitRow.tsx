@@ -16,7 +16,7 @@ export default function SubmitRow() {
                 ))}
             </ul>
 
-            <div className="flex items-center justify-end h-full gap-4 flex-col-reverse  ">
+            <div className="flex items-center justify-end h-full sm:gap-4 gap-12 flex-col-reverse  ">
                 {rowsPokemon.map((row: any, index: number) => {
                     return (
                         <PokeRow key={row[1].name + '-' + index} row={row} />
