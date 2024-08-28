@@ -20,7 +20,7 @@ export default function PokemonsTries({ rowsPokemon }: PokemonsTriesProps) {
                             className="revealCard1 pokedexBorder relative w-full h-full "
                         >
                             <Image
-                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${row[0].img}.png`}
+                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${row[0]?.img}.png`}
                                 alt={row[1].name}
                                 width={100}
                                 height={100}

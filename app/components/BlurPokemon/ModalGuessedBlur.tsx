@@ -32,9 +32,9 @@ export default function ModalGuessedBlur({
                         src={
                             pokeImg
                                 ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeImg}.png`
-                                : '/pokeball.png'
+                                : '/pokemon.png'
                         }
-                        alt={pokemonName ? pokemonName : 'pokemon'}
+                        alt="pokemon blur"
                         width={300}
                         height={300}
                         className="md:w-80 sm:w-72 w-44 "
