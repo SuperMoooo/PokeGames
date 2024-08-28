@@ -49,16 +49,18 @@ export default function BlurPokemon() {
         const getBlurPokemon = () => {
             try {
                 setLoading(true);
-                const randomNumber = Math.floor(
-                    Math.random() * allPokemonsList.length
-                );
-                const pokemonBlur: PokemonBlur[] = [
-                    {
-                        name: allPokemonsList[randomNumber][0],
-                        img: allPokemonsList[randomNumber][1],
-                    },
-                ];
-                dispatch(setCorrectPokemonBlur(pokemonBlur));
+                if (pokemonBlurData.length === 0) {
+                    const randomNumber = Math.floor(
+                        Math.random() * allPokemonsList.length
+                    );
+                    const pokemonBlur: PokemonBlur[] = [
+                        {
+                            name: allPokemonsList[randomNumber][0],
+                            img: allPokemonsList[randomNumber][1],
+                        },
+                    ];
+                    dispatch(setCorrectPokemonBlur(pokemonBlur));
+                }
             } catch (err) {
                 console.log(err);
             } finally {
