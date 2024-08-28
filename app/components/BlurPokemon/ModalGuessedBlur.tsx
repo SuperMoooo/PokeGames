@@ -39,7 +39,6 @@ export default function ModalGuessedBlur({
                         height={300}
                         className="md:w-80 sm:w-72 w-44 "
                         unoptimized
-                        priority
                     />
                 </picture>
                 <div className="flex items-center justify-center flex-col  gap-8">
