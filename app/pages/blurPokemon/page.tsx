@@ -26,6 +26,7 @@ export default function BlurPokemon() {
     );
 
     const blurRows = useSelector((state: any) => state.blurRows.data || []);
+
     const allPokemonsList = useSelector(
         (state: any) => state.globalAllPokemons.auxGlobalPokemonsBlur || []
     );
@@ -45,7 +46,7 @@ export default function BlurPokemon() {
 
     // EFECTS
     useEffect(() => {
-        const getBlurPokemon = async () => {
+        const getBlurPokemon = () => {
             try {
                 setLoading(true);
                 const randomNumber = Math.floor(
@@ -134,7 +135,7 @@ export default function BlurPokemon() {
     };
 
     if (loading) {
-        <Loading />;
+        return <Loading />;
     }
     return (
         <div className="grid grid-rows-[auto_1fr_auto] w-full min-h-[100dvh] gap-6 p-6 ">
