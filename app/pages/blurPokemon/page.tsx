@@ -159,8 +159,8 @@ export default function BlurPokemon() {
                 <PokemonsTries rowsPokemon={blurRows} />
             </main>
             <ModalGuessedBlur
-                pokeImg={pokemonBlurData[0].img}
-                pokemonName={pokemonBlurData[0].name}
+                pokeImg={pokemonBlurData[0]?.img}
+                pokemonName={pokemonBlurData[0]?.name}
                 restartGame={() => setRestartGameTrigger(true)}
                 gameEnded={gameEnded}
             />
