@@ -76,6 +76,7 @@ export default function BlurPokemon() {
             dispatch(resetBlurRows([]));
             setGameEnded(false);
             getBlurPokemon();
+            dispatch(setCorrectPokemonBlur([]));
         };
         if (restartGameTrigger) {
             restartGame();
